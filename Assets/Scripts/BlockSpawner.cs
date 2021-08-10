@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
 {
-    private Transform _spawnPoint;
     [SerializeField] 
     private GameObject _blockPrefab;
     [SerializeField] 
@@ -12,13 +11,12 @@ public class BlockSpawner : MonoBehaviour
     
     public void SpawnBlock()
     {
-        GameObject temp = Instantiate(_blockPrefab, _spawnPoint, false);
+        GameObject temp = Instantiate(_blockPrefab, transform, false);
         temp.GetComponent<SpriteRenderer>().sprite = _sprites[Random.Range(0, _sprites.Count)];
     }
 
     private void Start()
     {
-        _spawnPoint = GetComponent<Transform>();
         SpawnBlock();
     }
 }
