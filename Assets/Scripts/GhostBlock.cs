@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class GhostBlock : MonoBehaviour
 {
+    private SpriteRenderer _spriteRenderer;
     private KorobochkaScript _korobochka;
-    private GameObject _korobka;
-    private GameObject _spawn;
-    private GameObject _timer;
+    private BlockSpawner _spawner;
+    private Timer _timer;
 
     private void Start()
     {
-        _timer = GameObject.Find("loseColider");
-        _spawn = GameObject.FindGameObjectWithTag("Spawn");
-        _korobka = GameObject.FindGameObjectWithTag("korobochka");
-        _korobochka = _korobka.GetComponent<KorobochkaScript>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _timer = GameObject.Find("loseColider").GetComponent<Timer>();
+        _spawner = GameObject.FindGameObjectWithTag("Spawn").GetComponent<BlockSpawner>();
+        _korobochka = GameObject.FindGameObjectWithTag("korobochka").GetComponent<KorobochkaScript>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<SpriteRenderer>().sprite == gameObject.GetComponent<SpriteRenderer>().sprite && Input.GetKey(KeyCode.Space))
+        if (!Input.GetKey(KeyCode.Space))
+            return;
+        if (collision.gameObject.GetComponent<SpriteRenderer>().sprite == _spriteRenderer.sprite)
         {
             collision.gameObject.GetComponent<WheelJoint2D>().breakForce = 1f;
             _korobochka.Gblocks.Remove(gameObject);
-            _spawn.GetComponent<BlockSpawner>().SpawnBlock();
+            _spawner.SpawnBlock();
             collision.gameObject.tag = "Untagged";
             collision.gameObject.GetComponent<Rigidbody2D>().mass = 20;
-            _timer.GetComponent<Timer>().time += 30;
+            _timer.time += 30;
             Destroy(gameObject);
         }
     }
