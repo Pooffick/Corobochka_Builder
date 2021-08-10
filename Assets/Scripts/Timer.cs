@@ -5,25 +5,31 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public int Time = 30;
+    private int _time = 30;
     [SerializeField] 
     private Text _timerText;
     [SerializeField] 
     private Defit _defit;
 
-    public void StartTimer()
+    public void AddTime(uint time)
     {
-        _timerText.text = Time.ToString();
+        _time += time;
+    }
+
+    public void StartTimer(int time)
+    {
+        _time = time;
+        _timerText.text = _time.ToString();
         StartCoroutine(Timer());
     }
 
     private IEnumerator Timer()
     {
-        while (Time > 0)
+        while (_time > 0)
         {    
             yield return new WaitForSeconds(1);
-            Time--;
-            _timerText.text = Time.ToString();
+            _time--;
+            _timerText.text = _time.ToString();
         }
         _defit.Lose();
     }

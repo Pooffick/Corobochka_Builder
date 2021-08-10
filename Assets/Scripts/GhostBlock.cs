@@ -28,7 +28,7 @@ public class GhostBlock : MonoBehaviour
             _spawner.SpawnBlock();
             collision.gameObject.tag = "Untagged";
             collision.gameObject.GetComponent<Rigidbody2D>().mass = 20;
-            _timer.time += 30;
+            _timer.AddTime(30);
             Destroy(gameObject);
         }
     }

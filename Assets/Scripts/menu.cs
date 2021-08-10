@@ -6,31 +6,28 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] 
     private GameObject _obuchenie;
-    private GameObject _timer;
+    private Timer _timer;
     
     private void Start()
     {
-        _timer = GameObject.Find("loseColider");
+        _timer = GameObject.Find("loseColider").GetComponent<Timer>();
     }
     
     public void StartGameEz()
     {
         Destroy(_obuchenie);
-        _timer.GetComponent<Timer>().time = 1800;
-        _timer.GetComponent<Timer>().StartTimer();
+        _timer.StartTimer(1800);
     }
     
     public void StartGameMid()
     {
         Destroy(_obuchenie);
-        _timer.GetComponent<Timer>().time = 60;
-        _timer.GetComponent<Timer>().StartTimer();
+        _timer.StartTimer(60);
     }
     
     public void StartGameHard()
     {
         Destroy(_obuchenie);
-        _timer.GetComponent<Timer>().time = 20;
-        _timer.GetComponent<Timer>().StartTimer();
+        _timer.StartTimer(20);
     }
 }

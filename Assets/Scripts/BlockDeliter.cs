@@ -19,7 +19,7 @@ public class BlockDeliter : MonoBehaviour //вообще delEte, но лучше
         {
             Destroy(collision.gameObject);
             _spawner.spawnBlock();
-            _timer.time += 5;
+            _timer.AddTime(5);
         }
     }
 }
