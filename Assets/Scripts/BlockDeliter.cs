@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class BlockDeliter : MonoBehaviour //вообще delEte, но лучше использовать Remover хотя бы
 {
-    [SerializeField] 
-    private GameObject _spawn;
+    private BlockSpawner _spawner;
     [SerializeField] 
     private Timer _timer;
 
     private void Start()
     {
-        _spawn = GameObject.FindGameObjectWithTag("Spawn");
+        _spawner = GameObject.FindGameObjectWithTag("Spawn").GetComponent<BlockSpawner>();
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "block")
+        if (collision.gameObject.CompareTag("block"))
         {
             Destroy(collision.gameObject);
-            _spawn.GetComponent<BlockSpawner>().spawnBlock();
+            _spawner.spawnBlock();
             _timer.time += 5;
         }
     }
