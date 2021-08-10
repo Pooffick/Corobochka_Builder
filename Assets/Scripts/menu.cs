@@ -2,30 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class menu : MonoBehaviour
+public class Menu : MonoBehaviour
 {
-    [SerializeField] private GameObject obuchenie;
-    [SerializeField] private GameObject _Timer;
+    [SerializeField] 
+    private GameObject _obuchenie;
+    private GameObject _timer;
+    
     private void Start()
     {
-        _Timer = GameObject.Find("loseColider");
+        _timer = GameObject.Find("loseColider");
     }
+    
     public void StartGameEz()
     {
-        Destroy(obuchenie);
-        _Timer.GetComponent<Timer>().time = 1800;
-        _Timer.GetComponent<Timer>().StartTimer();
+        Destroy(_obuchenie);
+        _timer.GetComponent<Timer>().time = 1800;
+        _timer.GetComponent<Timer>().StartTimer();
     }
-public void StartGameMid()
+    
+    public void StartGameMid()
     {
-        Destroy(obuchenie);
-        _Timer.GetComponent<Timer>().time = 60;
-        _Timer.GetComponent<Timer>().StartTimer();
+        Destroy(_obuchenie);
+        _timer.GetComponent<Timer>().time = 60;
+        _timer.GetComponent<Timer>().StartTimer();
     }
-public void StartGameHard()
+    
+    public void StartGameHard()
     {
-        Destroy(obuchenie);
-        _Timer.GetComponent<Timer>().time = 20;
-        _Timer.GetComponent<Timer>().StartTimer();
+        Destroy(_obuchenie);
+        _timer.GetComponent<Timer>().time = 20;
+        _timer.GetComponent<Timer>().StartTimer();
     }
 }
