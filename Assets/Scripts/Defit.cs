@@ -7,18 +7,24 @@ using UnityEngine.SceneManagement;
 //с неймингом переменных тоже все не очень хорошо, но хер с ним
 public class Defit : MonoBehaviour
 {
-    public bool Lose = false;
-    public GameObject Image;
+    private bool _lose = false;
+    [SerializeField]
+    private GameObject _image;
+
+    public void Lose()
+    {
+        _image.SetActive(true);
+        _lose = true;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Image.SetActive(true);
-        Lose = true;
+        Lose();
     }
 
     private void Update()
     {
-        if (Input.anyKey && Lose)
+        if (Input.anyKey && _lose)
         {
             SceneManager.LoadScene(0);
         }

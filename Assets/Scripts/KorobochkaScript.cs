@@ -26,7 +26,7 @@ public class KorobochkaScript : MonoBehaviour
         GenerateBlocks();
     }
 
-    void GenerateBlocks()
+    private void GenerateBlocks()
     {
         if (_localHeight > _height)
         {
@@ -37,9 +37,8 @@ public class KorobochkaScript : MonoBehaviour
         {
             for (int x = 0; x < _width; x++)
             {
-                GameObject temp;
-                GBlocks.Add(Instantiate(_gBlock, new Vector2(x, _localHeight), Quaternion.identity));
-                temp = GBlocks[x];
+                GameObject temp = Instantiate(_gBlock, new Vector2(x, _localHeight), Quaternion.identity);
+                GBlocks.Add(temp);
                 temp.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Count)];
             }
             _localHeight++;
@@ -48,7 +47,7 @@ public class KorobochkaScript : MonoBehaviour
 
     private void Update()
     {
-        if(Gblocks.Count <= 0)
+        if (Gblocks.Count <= 0)
         {
             GenerateBlocks();
         }

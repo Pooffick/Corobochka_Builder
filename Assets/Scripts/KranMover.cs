@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class KranMover : MonoBehaviour
 {
+    [SerializeField]
+    private float _moveSpeed = 10f;
     [SerializeField] 
-    private Rigidbody2D KranController;
+    private Rigidbody2D _kranController;
     [SerializeField] 
-    public float MoveSpeed = 10f;
+    private Transform _verevka;
     [SerializeField] 
-    private Transform Verevka;
-    [SerializeField] 
-    private GameObject defit;
+    private GameObject _defit;
+
     private void Update()
     {
-        KranController.velocity = new Vector2(Input.GetAxis("Horizontal") * MoveSpeed, 0f);
-        if (Verevka.localScale.y > 0 && Verevka.localScale.y < 8)
+        _kranController.velocity = new Vector2(Input.GetAxis("Horizontal") * _moveSpeed, 0f);
+        if (_verevka.localScale.y > 0 && _verevka.localScale.y < 8)
         {
-            Verevka.localScale += new Vector3(0f, -Input.GetAxis("Vertical") * Time.deltaTime);
-            Verevka.position += new Vector3(0f, -Input.GetAxis("Vertical") * Time.deltaTime);
+            var newDirection = new Vector3(0f, -Input.GetAxis("Vertical") * Time.deltaTime);
+            _verevka.localScale += newDirection;
+            _verevka.position += newDirection;
         }
         else
         {
-            defit.GetComponent<Defit>().Lose = true;
-            defit.GetComponent<Defit>().Image.SetActive(true);
+            _defit.GetComponent<Defit>().Lose();
         }
     }
 }

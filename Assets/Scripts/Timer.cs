@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
     [SerializeField] 
     private Text _timerText;
     [SerializeField] 
-    private GameObject _defit;
+    private Defit _defit;
 
     public void StartTimer()
     {
@@ -25,7 +25,6 @@ public class Timer : MonoBehaviour
             Time--;
             _timerText.text = Time.ToString();
         }
-        _defit.GetComponent<Defit>().Lose = true;
-        _defit.GetComponent<Defit>().Image.SetActive(true);
+        _defit.Lose();
     }
 }
